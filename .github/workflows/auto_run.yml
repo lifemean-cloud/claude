@@ -78,7 +78,7 @@ jobs:
           echo "== 폴더에 있는 스킬 파일 =="
           find .agents/skills .claude/skills -name SKILL.md 2>/dev/null | sort || true
           echo "== 지침 규칙 파일 =="
-          ls CLAUDE.md AGENTS.md .claude/CLAUDE.md 2>/dev/null || true
+          ls SKILL.md CLAUDE.md AGENTS.md .claude/CLAUDE.md 2>/dev/null || true
           find rules .claude/rules -name '*.md' 2>/dev/null | sort || true
 
       - name: 5. 프로그램 실행 (모든 스킬·규칙 적용 + 검수)

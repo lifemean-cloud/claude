@@ -3,7 +3,7 @@
 
 1. skills-lock.json 에 등록된 모든 스킬과, 폴더에 추가된 스킬(.agents/skills, .claude/skills)을
    자동으로 찾아 읽습니다. (Auto-load)
-2. 지침 규칙 파일(CLAUDE.md, AGENTS.md, rules/*.md, .claude/rules/*.md 등)도 함께 읽습니다.
+2. 지침 규칙 파일(루트 SKILL.md, CLAUDE.md, AGENTS.md, rules/*.md, .claude/rules/*.md 등)도 함께 읽습니다.
 3. 작업 지시(tasks/daily_task.md, 또는 원격 실행 때 넘겨준 지시문)를 Claude에게 전달해
    초안을 만들고, 스킬 규칙에 맞춰 한 번 더 검수·개선한 최종본을 받습니다.
 4. 결과물을 output/<날짜>/index.html 로 저장하고 output/index.html 아카이브를 갱신합니다.
@@ -29,7 +29,7 @@ LOCK_FILE = ROOT / "skills-lock.json"
 # 스킬이 설치될 수 있는 폴더 (앞쪽이 우선)
 SKILL_DIRS = [ROOT / ".agents" / "skills", ROOT / ".claude" / "skills"]
 # 지침 규칙 파일: 정확한 경로 또는 폴더(그 안의 모든 .md)
-RULE_FILES = ["CLAUDE.md", "AGENTS.md", ".claude/CLAUDE.md"]
+RULE_FILES = ["SKILL.md", "CLAUDE.md", "AGENTS.md", ".claude/CLAUDE.md"]
 RULE_DIRS = ["rules", ".claude/rules"]
 TASK_FILE = ROOT / "tasks" / "daily_task.md"
 OUTPUT_DIR = ROOT / "output"
