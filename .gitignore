@@ -1,1 +1,64 @@
 __pycache__/
+
+# ------------------------------------------------------------
+# 스킬 설치 도구가 만든 바로가기(Junction) 폴더
+# 원본은 .agents/skills/ 에 있으므로 중복으로 올리지 않습니다.
+# ------------------------------------------------------------
+
+# .claude/skills 는 바로가기만 숨기고, 직접 넣은 진짜 스킬은 예외로 올립니다.
+/.claude/skills/*
+!/.claude/skills/ui-ux-pro-max/
+
+/skills/
+/data/
+
+# 다른 AI 도구용 스킬 바로가기 폴더
+/.adal/
+/.aider-desk/
+/.augment/
+/.autohand/
+/.bob/
+/.codeartsdoer/
+/.codebuddy/
+/.codemaker/
+/.codestudio/
+/.commandcode/
+/.continue/
+/.cortex/
+/.crush/
+/.devin/
+/.forge/
+/.fx/
+/.goose/
+/.grok/
+/.hermes/
+/.iflow/
+/.inferencesh/
+/.jazz/
+/.junie/
+/.kimchi/
+/.kiro/
+/.kode/
+/.lingma/
+/.mcpjam/
+/.minimax/
+/.moxby/
+/.mux/
+/.neovate/
+/.ona/
+/.openhands/
+/.pochi/
+/.posit/
+/.qoder/
+/.qwen/
+/.reasonix/
+/.roo/
+/.rovodev/
+/.tabnine/
+/.terramind/
+/.tinycloud/
+/.trae/
+/.vibe/
+/.windsurf/
+/.zcode/
+/.zencoder/
