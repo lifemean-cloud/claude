@@ -1,11 +1,5 @@
 {
   "extraKnownMarketplaces": {
-    "ecc": {
-      "source": {
-        "source": "git",
-        "url": "https://github.com/affaan-m/ECC.git"
-      }
-    },
     "thedotmack": {
       "source": {
         "source": "github",
@@ -20,32 +14,7 @@
     }
   },
   "enabledPlugins": {
-    "ecc@ecc": true,
     "claude-mem@thedotmack": true,
     "superpowers@superpowers-marketplace": true
-  },
-  "hooks": {
-    "PreToolUse": [
-      {
-        "matcher": "Bash|Grep",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "graphify hook-guard search",
-            "timeout": 10
-          }
-        ]
-      },
-      {
-        "matcher": "Read|Glob",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "graphify hook-guard read",
-            "timeout": 10
-          }
-        ]
-      }
-    ]
   }
 }

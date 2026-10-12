@@ -11,26 +11,17 @@ __pycache__/
 !/.claude/skills/ui-ux-pro-max/
 # Superpowers 스킬 (obra/superpowers v7.0.0, MIT) — 웹·클라우드에서는 플러그인이 안 깔리므로 복사본 사용
 !/.claude/skills/brainstorming/
-!/.claude/skills/diagnosing-superpowers/
-!/.claude/skills/dispatching-parallel-agents/
 !/.claude/skills/executing-plans/
-!/.claude/skills/finishing-a-development-branch/
-!/.claude/skills/receiving-code-review/
-!/.claude/skills/requesting-code-review/
-!/.claude/skills/subagent-driven-development/
 !/.claude/skills/systematic-debugging/
-!/.claude/skills/test-driven-development/
-!/.claude/skills/using-git-worktrees/
-!/.claude/skills/using-superpowers/
 !/.claude/skills/verification-before-completion/
 !/.claude/skills/writing-plans/
 !/.claude/skills/writing-skills/
-# 프로젝트 범위로 직접 설치한 스킬
-!/.claude/skills/graphify/
-!/.claude/skills/ponytail/
 
-# graphify 설치 도구가 만든 설정 백업 파일
+# graphify (코드 지도 도구) — 이 PC 전용. 훅은 .claude/settings.local.json 에 있음
 *.graphify-bak
+/graphify-out/
+/CLAUDE.md
+/.claude/CLAUDE.md
 
 /skills/
 /data/
@@ -89,3 +80,93 @@ __pycache__/
 
 # graphify 임시 캐시 (PC마다 다시 만들어짐)
 /graphify-out/cache/
+
+# ------------------------------------------------------------
+# 보험업 자동화에 필요 없어 GitHub 에서 숨긴 스킬 (PC 에는 그대로 있음)
+# 다시 올리려면 해당 줄을 지우고 git add 하세요.
+# ------------------------------------------------------------
+/.agents/skills/aso/
+/.agents/skills/churn-prevention/
+/.agents/skills/cli-a2a/
+/.agents/skills/cli-backup-sync/
+/.agents/skills/cli-batches/
+/.agents/skills/cli-chat/
+/.agents/skills/cli-compression/
+/.agents/skills/cli-contexts/
+/.agents/skills/cli-cost-usage/
+/.agents/skills/cli-eval/
+/.agents/skills/cli-health/
+/.agents/skills/cli-keys/
+/.agents/skills/cli-mcp/
+/.agents/skills/cli-models/
+/.agents/skills/cli-plugins-skills/
+/.agents/skills/cli-policy-audit/
+/.agents/skills/cli-providers/
+/.agents/skills/cli-resilience/
+/.agents/skills/cli-routing/
+/.agents/skills/cli-serve/
+/.agents/skills/cli-setup/
+/.agents/skills/cli-skill-collector/
+/.agents/skills/cli-tunnel/
+/.agents/skills/cold-email/
+/.agents/skills/competitors/
+/.agents/skills/config-codex-cli/
+/.agents/skills/design-taste-frontend-v1/
+/.agents/skills/diagnosing-superpowers/
+/.agents/skills/directory-submissions/
+/.agents/skills/dispatching-parallel-agents/
+/.agents/skills/finishing-a-development-branch/
+/.agents/skills/gpt-taste/
+/.agents/skills/graphify/
+/.agents/skills/image-to-code/
+/.agents/skills/imagegen-frontend-mobile/
+/.agents/skills/imagegen-frontend-web/
+/.agents/skills/industrial-brutalist-ui/
+/.agents/skills/influencer-marketing/
+/.agents/skills/launch/
+/.agents/skills/marketing-council/
+/.agents/skills/omni-agents-a2a/
+/.agents/skills/omni-api-keys/
+/.agents/skills/omni-auth/
+/.agents/skills/omni-budget/
+/.agents/skills/omni-cache/
+/.agents/skills/omni-cli-tools/
+/.agents/skills/omni-combos-routing/
+/.agents/skills/omni-compression/
+/.agents/skills/omni-context-rtk/
+/.agents/skills/omni-db-backups/
+/.agents/skills/omni-github-skills/
+/.agents/skills/omni-inference/
+/.agents/skills/omni-mcp/
+/.agents/skills/omni-models/
+/.agents/skills/omni-providers/
+/.agents/skills/omni-proxies/
+/.agents/skills/omni-resilience/
+/.agents/skills/omni-settings/
+/.agents/skills/omni-sync-cloud/
+/.agents/skills/omni-tunnels/
+/.agents/skills/omni-usage-logs/
+/.agents/skills/omni-version-manager/
+/.agents/skills/omni-webhooks/
+/.agents/skills/onboarding/
+/.agents/skills/paywalls/
+/.agents/skills/ponytail/
+/.agents/skills/pricing/
+/.agents/skills/prospecting/
+/.agents/skills/public-relations/
+/.agents/skills/receiving-code-review/
+/.agents/skills/remotion-docs/
+/.agents/skills/remotion-interactivity/
+/.agents/skills/remotion-maps/
+/.agents/skills/remotion-multimedia/
+/.agents/skills/remotion-saas/
+/.agents/skills/remotion-studio/
+/.agents/skills/remotion-upgrade/
+/.agents/skills/requesting-code-review/
+/.agents/skills/sales-enablement/
+/.agents/skills/signup/
+/.agents/skills/stitch-design-taste/
+/.agents/skills/subagent-driven-development/
+/.agents/skills/test-driven-development/
+/.agents/skills/using-git-worktrees/
+/.agents/skills/using-superpowers/
