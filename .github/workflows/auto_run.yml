@@ -11,6 +11,8 @@
 #     CLAUDE.md / AGENTS.md / rules/*.md 지침 파일을 자동으로 읽고
 #   - 그 규칙대로 결과물을 만든 뒤 한 번 더 검수·개선해서
 #   - output/ 폴더에 저장하고 이 저장소로 백업(커밋+푸시)합니다.
+#   - memory/ 의 기억(직접 적는 MEMORY.md + 자동 기록 log.md)을 읽고,
+#     오늘 한 일을 log.md 에 덧붙여 함께 백업합니다. (가상 컴퓨터가 꺼져도 기억 유지)
 #
 #  원격 실행 방법 (회사 컴퓨터에서, gh CLI 로그인 상태):
 #   gh workflow run auto_run.yml -R lifemean-cloud/claude
@@ -92,7 +94,7 @@ jobs:
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add output/
+          git add output/ memory/
           if git diff --cached --quiet; then
             echo "새로 바뀐 결과물이 없어 백업을 건너뜁니다."
             exit 0

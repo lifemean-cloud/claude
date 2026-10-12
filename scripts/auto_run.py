@@ -7,6 +7,9 @@
 3. 작업 지시(tasks/daily_task.md, 또는 원격 실행 때 넘겨준 지시문)를 Claude에게 전달해
    초안을 만들고, 스킬 규칙에 맞춰 한 번 더 검수·개선한 최종본을 받습니다.
 4. 결과물을 output/<날짜>/index.html 로 저장하고 output/index.html 아카이브를 갱신합니다.
+5. 기억(memory/): 실행 전에 memory/MEMORY.md(직접 적는 장기 기억·피드백)와
+   memory/log.md 의 최근 기록을 읽어 반영하고, 실행 후 오늘 한 일을 log.md 에 덧붙입니다.
+   워크플로가 memory/ 를 함께 커밋하므로 가상 컴퓨터가 꺼져도 기억이 저장소에 남습니다.
 
 필요한 것: 환경 변수 ANTHROPIC_API_KEY (GitHub 저장소 Secrets에 등록)
 선택: TASK_OVERRIDE (이번 실행에만 쓸 지시문), REFINE_PASSES (검수 횟수, 기본 1)
@@ -33,6 +36,11 @@ RULE_FILES = ["SKILL.md", "CLAUDE.md", "AGENTS.md", ".claude/CLAUDE.md"]
 RULE_DIRS = ["rules", ".claude/rules"]
 TASK_FILE = ROOT / "tasks" / "daily_task.md"
 OUTPUT_DIR = ROOT / "output"
+MEMORY_DIR = ROOT / "memory"
+MEMORY_NOTES = MEMORY_DIR / "MEMORY.md"  # 사람이 직접 적는 장기 기억·피드백
+MEMORY_LOG = MEMORY_DIR / "log.md"  # 실행할 때마다 자동으로 쌓이는 기록
+LOG_HEADER = "# 자동 실행 기록\n\n프로그램이 실행할 때마다 아래에 자동으로 덧붙입니다.\n"
+RECENT_LOG_ENTRIES = 14  # Claude에게 보여줄 최근 기록 개수
 
 MODEL = "claude-opus-5-5"
 EFFORT = "high"
@@ -107,6 +115,24 @@ def load_rules() -> tuple[str, list[str]]:
     return text, [rel(p) for p in paths]
 
 
+def load_memory() -> tuple[str, int]:
+    """장기 기억 노트와 최근 실행 기록을 읽어 하나의 블록으로 만듭니다."""
+    parts = []
+    if MEMORY_NOTES.is_file():
+        notes = MEMORY_NOTES.read_text(encoding="utf-8").strip()
+        if notes:
+            parts.append(f"<notes>\n{notes}\n</notes>")
+
+    recent: list[str] = []
+    if MEMORY_LOG.is_file():
+        entries = re.split(r"(?m)^(?=## )", MEMORY_LOG.read_text(encoding="utf-8"))
+        recent = [e.strip() for e in entries if e.startswith("## ")][-RECENT_LOG_ENTRIES:]
+        if recent:
+            parts.append("<recent_runs>\n" + "\n\n".join(recent) + "\n</recent_runs>")
+
+    return "\n\n".join(parts), len(recent)
+
+
 def build_system_prompt(skills_text: str, rules_text: str) -> str:
     rules_block = f"<project_rules>\n{rules_text}\n</project_rules>\n\n" if rules_text else ""
     return (
@@ -131,13 +157,15 @@ def build_system_prompt(skills_text: str, rules_text: str) -> str:
     )
 
 
-def ask_claude(client: anthropic.Anthropic, system_prompt: str, user_text: str) -> str:
-    """Claude에게 요청하고 HTML 문자열을 돌려받습니다."""
+def call_claude(
+    client: anthropic.Anthropic, system_prompt: str, user_text: str, effort: str, max_tokens: int
+):
+    """Claude에게 요청하고 응답 전체를 돌려받습니다."""
     with client.beta.messages.stream(
         model=MODEL,
-        max_tokens=64000,
+        max_tokens=max_tokens,
         thinking={"type": "adaptive"},
-        output_config={"effort": EFFORT},
+        output_config={"effort": effort},
         # 안전 필터가 거절하면 서버가 알아서 다른 모델로 재시도합니다.
         betas=["server-side-fallback-2026-07-01"],
         fallbacks="default",
@@ -153,27 +181,45 @@ def ask_claude(client: anthropic.Anthropic, system_prompt: str, user_text: str) 
     if response.stop_reason == "max_tokens":
         sys.exit("[오류] 결과물이 너무 길어 중간에 잘렸습니다. 작업 지시를 줄여 주세요.")
 
-    text = "".join(block.text for block in response.content if block.type == "text").strip()
-    # 혹시 ```html ... ``` 로 감싸서 왔다면 벗겨냅니다.
-    fenced = re.search(r"```(?:html)?\s*(.*?)```", text, re.DOTALL)
-    if fenced:
-        text = fenced.group(1).strip()
-    if "<html" not in text.lower():
-        sys.exit("[오류] HTML 문서를 받지 못했습니다.")
-
     u = response.usage
     print(
         f"[정보] 모델 {response.model} | 입력 {u.input_tokens} · 캐시 쓰기 "
         f"{u.cache_creation_input_tokens or 0} · 캐시 읽기 {u.cache_read_input_tokens or 0} "
         f"· 출력 {u.output_tokens} 토큰"
     )
+    return response
+
+
+def response_text(response) -> str:
+    return "".join(block.text for block in response.content if block.type == "text").strip()
+
+
+def ask_claude(client: anthropic.Anthropic, system_prompt: str, user_text: str) -> str:
+    """Claude에게 요청하고 HTML 문자열을 돌려받습니다."""
+    text = response_text(call_claude(client, system_prompt, user_text, EFFORT, 64000))
+    # 혹시 ```html ... ``` 로 감싸서 왔다면 벗겨냅니다.
+    fenced = re.search(r"```(?:html)?\s*(.*?)```", text, re.DOTALL)
+    if fenced:
+        text = fenced.group(1).strip()
+    if "<html" not in text.lower():
+        sys.exit("[오류] HTML 문서를 받지 못했습니다.")
     return text
 
 
-def generate_html(client: anthropic.Anthropic, system_prompt: str, task: str, today: str) -> str:
+def generate_html(
+    client: anthropic.Anthropic, system_prompt: str, task: str, today: str, memory: str
+) -> str:
     """초안을 만든 뒤 스킬 체크리스트로 검수해 개선한 최종본을 돌려줍니다."""
     print("[진행] 초안 작성 중...")
-    doc = ask_claude(client, system_prompt, f"오늘 날짜: {today}\n\n{task}")
+    memory_block = (
+        f"<memory>\n{memory}\n</memory>\n\n"
+        "Use the memory above: follow the notes and feedback, and keep a sense of continuity, "
+        "but do not repeat the visual direction, palette or layout of recent runs unless the "
+        "notes ask for it.\n\n"
+        if memory
+        else ""
+    )
+    doc = ask_claude(client, system_prompt, f"오늘 날짜: {today}\n\n{memory_block}{task}")
 
     for i in range(REFINE_PASSES):
         print(f"[진행] 검수·개선 {i + 1}/{REFINE_PASSES} ...")
@@ -188,6 +234,32 @@ def generate_html(client: anthropic.Anthropic, system_prompt: str, task: str, to
             "Fix every issue you find and return the complete improved HTML document only.",
         )
     return doc
+
+
+def remember_run(
+    client: anthropic.Anthropic, system_prompt: str, doc: str, task: str, stamp: str, page: str
+) -> None:
+    """오늘 만든 결과물을 짧게 요약해 memory/log.md 에 덧붙입니다."""
+    print("[진행] 기억 기록 작성 중...")
+    note = response_text(call_claude(
+        client,
+        system_prompt,
+        f"<task>\n{task}\n</task>\n\n<final_page>\n{doc}\n</final_page>\n\n"
+        "Write a short memory entry in Korean about this run, for your future self. Plain "
+        "Markdown bullet points only, no heading, at most 6 bullets: the topic and main content, "
+        "the visual direction and skills used, the palette and fonts, the layout pattern, and "
+        "one concrete idea to do differently or better next time.",
+        "low",
+        4000,
+    ))
+    if not note:
+        print("[경고] 기억 기록이 비어 있어 건너뜁니다.")
+        return
+
+    MEMORY_DIR.mkdir(exist_ok=True)
+    log = MEMORY_LOG.read_text(encoding="utf-8") if MEMORY_LOG.is_file() else LOG_HEADER
+    log = log.rstrip() + f"\n\n## {stamp} — `{page}`\n\n{note}\n"
+    MEMORY_LOG.write_text(log, encoding="utf-8")
 
 
 def page_title(doc: str, fallback: str) -> str:
@@ -271,9 +343,12 @@ def main() -> None:
     print(f"[로드] 스킬 {len(skill_names)}개: {', '.join(skill_names)}")
     print(f"[로드] 규칙 파일 {len(rule_paths)}개: {', '.join(rule_paths) or '없음'}")
     print(f"[로드] 작업 지시: {task_source}")
+    memory, recent_count = load_memory()
+    print(f"[로드] 기억: 노트 {'있음' if MEMORY_NOTES.is_file() else '없음'}, 최근 기록 {recent_count}개")
 
+    client = anthropic.Anthropic()
     system_prompt = build_system_prompt(skills_text, rules_text)
-    doc = generate_html(anthropic.Anthropic(), system_prompt, task, today)
+    doc = generate_html(client, system_prompt, task, today, memory)
 
     # 같은 날 두 번 이상 실행하면 시각을 붙여 덮어쓰지 않습니다.
     day_dir = OUTPUT_DIR / today
@@ -282,8 +357,11 @@ def main() -> None:
     day_dir.mkdir(parents=True, exist_ok=True)
     (day_dir / "index.html").write_text(doc, encoding="utf-8")
     write_archive()
+    remember_run(
+        client, system_prompt, doc, task, now.strftime("%Y-%m-%d %H:%M"), f"{rel(day_dir)}/index.html"
+    )
 
-    print(f"[완료] {rel(day_dir)}/index.html 저장")
+    print(f"[완료] {rel(day_dir)}/index.html 저장, 기억 기록 갱신")
     write_summary([
         f"## 자동 실행 결과 ({today})",
         f"- 결과물: `{rel(day_dir)}/index.html` — {page_title(doc, today)}",
@@ -291,6 +369,7 @@ def main() -> None:
         f"- 로드한 스킬 ({len(skill_names)}): {', '.join(skill_names)}",
         f"- 로드한 규칙 파일 ({len(rule_paths)}): {', '.join(rule_paths) or '없음'}",
         f"- 검수 횟수: {REFINE_PASSES}",
+        f"- 반영한 기억: 최근 기록 {recent_count}개 → `{rel(MEMORY_LOG)}` 에 오늘 기록 추가",
     ])
 
 
