@@ -25,6 +25,12 @@ __pycache__/
 !/.claude/skills/verification-before-completion/
 !/.claude/skills/writing-plans/
 !/.claude/skills/writing-skills/
+# 프로젝트 범위로 직접 설치한 스킬
+!/.claude/skills/graphify/
+!/.claude/skills/ponytail/
+
+# graphify 설치 도구가 만든 설정 백업 파일
+*.graphify-bak
 
 /skills/
 /data/
