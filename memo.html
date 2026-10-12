@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <!-- 한글이 깨지지 않도록 문자 인코딩을 UTF-8로 지정 -->
+  <meta charset="UTF-8">
+  <!-- 휴대폰에서도 화면 크기에 맞게 보이도록 설정 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>나의 메모장</title>
+
+  <style>
+    /* ===== 디자인(모양)을 정하는 부분 ===== */
+    body {
+      font-family: "Malgun Gothic", "맑은 고딕", sans-serif;
+      background: #f4f1ea;
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      text-align: center;
+      color: #5a4a3a;
+    }
+
+    /* 메모 입력 칸 */
+    textarea {
+      width: 100%;
+      height: 120px;
+      padding: 12px;
+      font-size: 16px;
+      font-family: inherit;
+      border: 2px solid #d6cbb8;
+      border-radius: 8px;
+      box-sizing: border-box;
+      resize: vertical;
+    }
+
+    textarea:focus {
+      outline: none;
+      border-color: #a0826d;
+    }
+
+    /* 버튼 */
+    button {
+      background: #a0826d;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+
+    button:hover {
+      background: #806452;
+    }
+
+    /* 메모 하나하나의 카드 */
+    .memo {
+      background: #fffdf7;
+      border-left: 5px solid #e8c547;
+      padding: 12px 16px;
+      margin-top: 12px;
+      border-radius: 6px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .memo-text {
+      white-space: pre-wrap; /* 줄바꿈을 그대로 보여줌 */
+      word-break: break-all;
+    }
+
+    .memo-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 8px;
+      font-size: 13px;
+      color: #999;
+    }
+
+    .delete-btn {
+      background: #d9534f;
+      padding: 4px 10px;
+      font-size: 13px;
+      margin-top: 0;
+    }
+
+    .delete-btn:hover {
+      background: #b52b27;
+    }
+
+    .empty {
+      text-align: center;
+      color: #aaa;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== 화면에 보이는 내용 ===== -->
+  <div class="container">
+    <h1>📝 나의 메모장</h1>
+
+    <textarea id="memoInput" placeholder="여기에 메모를 입력하세요..."></textarea>
+    <button onclick="addMemo()">메모 저장</button>
+
+    <!-- 저장된 메모들이 이곳에 표시됩니다 -->
+    <div id="memoList"></div>
+  </div>
+
+  <script>
+    // ===== 동작(기능)을 정하는 부분 =====
+
+    // 브라우저에 저장된 메모 불러오기 (없으면 빈 목록)
+    let memos = JSON.parse(localStorage.getItem("memos") || "[]");
+
+    // 메모 목록을 브라우저에 저장하기
+    function saveMemos() {
+      localStorage.setItem("memos", JSON.stringify(memos));
+    }
+
+    // 새 메모 추가하기
+    function addMemo() {
+      const input = document.getElementById("memoInput");
+      const text = input.value.trim();
+
+      if (text === "") {
+        alert("메모 내용을 입력해 주세요!");
+        return;
+      }
+
+      memos.unshift({
+        text: text,
+        date: new Date().toLocaleString("ko-KR")
+      });
+
+      saveMemos();
+      input.value = "";   // 입력칸 비우기
+      showMemos();
+    }
+
+    // 메모 삭제하기
+    function deleteMemo(index) {
+      if (confirm("이 메모를 삭제할까요?")) {
+        memos.splice(index, 1);
+        saveMemos();
+        showMemos();
+      }
+    }
+
+    // 화면에 메모 목록 그리기
+    function showMemos() {
+      const list = document.getElementById("memoList");
+      list.innerHTML = "";
+
+      if (memos.length === 0) {
+        list.innerHTML = '<p class="empty">아직 메모가 없어요.</p>';
+        return;
+      }
+
+      memos.forEach(function (memo, index) {
+        const div = document.createElement("div");
+        div.className = "memo";
+
+        const textDiv = document.createElement("div");
+        textDiv.className = "memo-text";
+        textDiv.textContent = memo.text;
+
+        const footer = document.createElement("div");
+        footer.className = "memo-footer";
+        footer.innerHTML = "<span>" + memo.date + "</span>";
+
+        const delBtn = document.createElement("button");
+        delBtn.className = "delete-btn";
+        delBtn.textContent = "삭제";
+        delBtn.onclick = function () { deleteMemo(index); };
+
+        footer.appendChild(delBtn);
+        div.appendChild(textDiv);
+        div.appendChild(footer);
+        list.appendChild(div);
+      });
+    }
+
+    // Ctrl + Enter 를 누르면 바로 저장
+    document.getElementById("memoInput").addEventListener("keydown", function (e) {
+      if (e.ctrlKey && e.key === "Enter") {
+        addMemo();
+      }
+    });
+
+    // 페이지가 열리면 저장된 메모 보여주기
+    showMemos();
+  </script>
+
+</body>
+</html>
