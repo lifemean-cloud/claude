@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>오늘의 한 페이지 | 2026년 10월 12일 월요일</title>
+<meta name="description" content="2026년 10월 12일 월요일, 오늘의 영감 문장과 작은 실천, 하루를 정리하는 메모.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#FAFAFA" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0F0F11" media="(prefers-color-scheme: dark)">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+  :root {
+    --bg: #FAFAFA;
+    --surface: #FFFFFF;
+    --text: #18181B;
+    --text-2: #3F3F46;
+    --muted: #63636C;
+    --line: #E4E4E7;
+    --line-strong: #D4D4D8;
+    --accent: #2F6B4F;
+    --accent-ink: #FFFFFF;
+    --accent-soft: rgba(47, 107, 79, 0.08);
+    --danger: #A33A2E;
+    --shadow: 0 1px 2px rgba(24, 24, 27, 0.04), 0 8px 24px -12px rgba(24, 24, 27, 0.08);
+    --r-surface: 12px;
+    --r-control: 6px;
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    --font: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", system-ui, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0F0F11;
+      --surface: #161619;
+      --text: #EDEDEF;
+      --text-2: #C9C9CF;
+      --muted: #9C9CA6;
+      --line: #26262B;
+      --line-strong: #3A3A41;
+      --accent: #7CC4A0;
+      --accent-ink: #0F0F11;
+      --accent-soft: rgba(124, 196, 160, 0.10);
+      --danger: #E8877B;
+      --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px -12px rgba(0, 0, 0, 0.5);
+    }
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font);
+    font-size: 16px;
+    line-height: 1.7;
+    letter-spacing: -0.005em;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  /* 아주 옅은 종이결: 고정 레이어에만 적용 */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .skip {
+    position: absolute; left: 16px; top: -56px;
+    background: var(--text); color: var(--bg);
+    padding: 10px 16px; border-radius: var(--r-control);
+    font-size: 14px; text-decoration: none; z-index: 2;
+  }
+  .skip:focus { top: 16px; }
+
+  .wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* 상단 */
+  .masthead {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+    border-bottom: 1px solid var(--line);
+  }
+  .wordmark {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 650;
+    font-size: 15px;
+    letter-spacing: -0.02em;
+  }
+  .mark {
+    width: 20px; height: 20px;
+    border-radius: 5px;
+    border: 1.5px solid var(--text);
+    position: relative;
+    flex: none;
+  }
+  .mark::after {
+    content: "";
+    position: absolute;
+    right: -1.5px; top: -1.5px;
+    width: 8px; height: 8px;
+    background: var(--accent);
+    border-radius: 0 5px 0 3px;
+  }
+  .masthead time {
+    font-size: 14px;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* 본문 그리드 */
+  .layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 44px;
+    padding: 36px 0 72px;
+  }
+  @media (min-width: 900px) {
+    .layout {
+      grid-template-columns: 260px minmax(0, 1fr);
+      gap: 80px;
+      padding: 72px 0 112px;
+    }
+  }
+
+  /* 날짜 기둥 */
+  .day { align-self: start; min-width: 0; }
+  @media (min-width: 900px) {
+    .day { position: sticky; top: 40px; }
+  }
+  .day-number {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+  }
+  .day-number strong {
+    font-size: clamp(4.5rem, 14vw, 7.5rem);
+    font-weight: 700;
+    line-height: 0.9;
+    letter-spacing: -0.06em;
+    font-variant-numeric: tabular-nums;
+  }
+  .day-number span {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+  .day-weekday {
+    margin: 16px 0 0;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+  .day-facts {
+    margin: 28px 0 0;
+    padding: 20px 0 0;
+    border-top: 1px solid var(--line);
+    display: grid;
+    gap: 12px;
+  }
+  .day-facts div {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    font-size: 14px;
+  }
+  .day-facts dt { color: var(--muted); }
+  .day-facts dd { margin: 0; font-variant-numeric: tabular-nums; font-weight: 500; text-align: right; }
+
+  .weekbar {
+    margin: 24px 0 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 6px;
+  }
+  .weekbar li {
+    display: grid;
+    place-items: center;
+    align-content: center;
+    gap: 1px;
+    height: 48px;
+    border-radius: var(--r-control);
+    border: 1px solid var(--line);
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+  .weekbar .wd { font-size: 11px; line-height: 1.2; }
+  .weekbar .dn { font-size: 14px; line-height: 1.2; font-weight: 500; color: var(--text-2); }
+  .weekbar li[aria-current="date"] {
+    background: var(--text);
+    border-color: var(--text);
+    color: var(--bg);
+  }
+  .weekbar li[aria-current="date"] .dn { color: var(--bg); font-weight: 650; }
+
+  @media (max-width: 899px) {
+    .day-facts {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 24px;
+      padding-top: 18px;
+    }
+    .day-facts div {
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 2px;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    .day-facts dd { text-align: left; font-size: 14px; }
+    .weekbar { margin-top: 20px; }
+  }
+
+  /* 콘텐츠 */
+  .content { display: grid; gap: 80px; min-width: 0; }
+  @media (min-width: 900px) { .content { gap: 104px; } }
+
+  .eyebrow {
+    margin: 0 0 20px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.02em;
+  }
+
+  .quote blockquote { margin: 0; }
+  .quote-text {
+    margin: 0;
+    font-size: clamp(1.85rem, 4.6vw, 2.9rem);
+    font-weight: 650;
+    line-height: 1.34;
+    letter-spacing: -0.035em;
+    max-width: 18ch;
+    text-wrap: balance;
+  }
+  .quote-text em {
+    font-style: normal;
+    color: var(--accent);
+  }
+  .quote-note {
+    margin: 32px 0 0;
+    max-width: 58ch;
+    color: var(--text-2);
+    font-size: 17px;
+    line-height: 1.85;
+    text-wrap: pretty;
+  }
+
+  h2 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 650;
+    letter-spacing: -0.025em;
+    line-height: 1.4;
+  }
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+  .count {
+    font-size: 14px;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .count b { color: var(--text); font-weight: 600; }
+
+  /* 체크리스트 */
+  .tasks {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--r-surface);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .tasks li + li { border-top: 1px solid var(--line); }
+  .task {
+    position: relative;
+    display: grid;
+    grid-template-columns: 22px minmax(0, 1fr);
+    gap: 16px;
+    align-items: start;
+    padding: 20px 22px;
+    cursor: pointer;
+    transition: background-color 0.2s var(--ease);
+    -webkit-tap-highlight-color: transparent;
+  }
+  @media (hover: hover) {
+    .task:hover { background: var(--accent-soft); }
+  }
+  .task input {
+    position: absolute;
+    left: 22px; top: 22px;
+    width: 22px; height: 22px;
+    margin: 0;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .box {
+    width: 22px; height: 22px;
+    margin-top: 2px;
+    border-radius: var(--r-control);
+    border: 1.5px solid var(--line-strong);
+    background: var(--surface);
+    position: relative;
+    transition: background-color 0.2s var(--ease), border-color 0.2s var(--ease), transform 0.15s var(--ease);
+  }
+  .box::after {
+    content: "";
+    position: absolute;
+    left: 6.5px; top: 2.5px;
+    width: 6px; height: 11px;
+    border: solid var(--accent-ink);
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg) scale(0.4);
+    opacity: 0;
+    transition: transform 0.25s var(--ease), opacity 0.2s var(--ease);
+  }
+  .task:active .box { transform: scale(0.92); }
+  .task input:checked + .box {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+  .task input:checked + .box::after {
+    opacity: 1;
+    transform: rotate(45deg) scale(1);
+  }
+  .task input:focus-visible + .box {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+  .task-title {
+    display: block;
+    font-weight: 600;
+    font-size: 16.5px;
+    letter-spacing: -0.015em;
+    line-height: 1.5;
+    transition: color 0.2s var(--ease);
+  }
+  .task-desc {
+    display: block;
+    margin-top: 4px;
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .task input:checked ~ .task-body .task-title {
+    color: var(--muted);
+    text-decoration: line-through;
+    text-decoration-color: var(--accent);
+    text-decoration-thickness: 1.5px;
+  }
+  .done-note {
+    margin: 16px 2px 0;
+    font-size: 15px;
+    color: var(--accent);
+    min-height: 1.6em;
+  }
+
+  /* 메모 */
+  .field { display: grid; gap: 8px; }
+  .field label {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .helper { font-size: 14px; color: var(--muted); margin: 0; }
+  textarea {
+    width: 100%;
+    min-height: 200px;
+    resize: vertical;
+    padding: 18px 20px;
+    font: inherit;
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--text);
+    background: var(--surface);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--r-surface);
+    box-shadow: var(--shadow);
+    transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
+  }
+  textarea::placeholder { color: var(--muted); opacity: 1; }
+  textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft), var(--shadow);
+  }
+  .memo-foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px 20px;
+    margin-top: 4px;
+  }
+  .status {
+    font-size: 14px;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+  .status.is-saved { color: var(--accent); }
+  .status.is-error { color: var(--danger); }
+  .memo-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-left: auto;
+  }
+  .chars {
+    font-size: 13px;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+  .btn-ghost {
+    appearance: none;
+    font: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+    min-height: 44px;
+    padding: 0 16px;
+    border-radius: var(--r-control);
+    border: 1px solid var(--line-strong);
+    background: transparent;
+    color: var(--text-2);
+    cursor: pointer;
+    transition: background-color 0.2s var(--ease), color 0.2s var(--ease), border-color 0.2s var(--ease), transform 0.15s var(--ease);
+  }
+  @media (hover: hover) {
+    .btn-ghost:hover:not(:disabled) { background: var(--surface); color: var(--text); }
+  }
+  .btn-ghost:active:not(:disabled) { transform: scale(0.98); }
+  .btn-ghost:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .btn-ghost[data-armed="true"] {
+    border-color: var(--danger);
+    color: var(--danger);
+  }
+  .btn-ghost:disabled { opacity: 0.45; cursor: default; }
+
+  .colophon {
+    border-top: 1px solid var(--line);
+    padding: 28px 0 calc(40px + env(safe-area-inset-bottom));
+    font-size: 14px;
+    color: var(--muted);
+  }
+
+  @media (max-width: 560px) {
+    .wrap { padding: 0 18px; }
+    .task { padding: 18px; gap: 14px; }
+    .task input { left: 18px; top: 20px; }
+    .quote-note { font-size: 16px; margin-top: 24px; }
+    .content { gap: 64px; }
+  }
+
+  /* 등장 모션: 읽는 순서를 안내하는 정도로만 */
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      opacity: 0;
+      transform: translateY(12px);
+      animation: rise 0.8s var(--ease) forwards;
+      animation-delay: calc(var(--i, 0) * 90ms);
+    }
+    @keyframes rise { to { opacity: 1; transform: none; } }
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">본문으로 건너뛰기</a>
+
+<div class="wrap">
+  <header class="masthead">
+    <span class="wordmark"><span class="mark" aria-hidden="true"></span>오늘의 한 페이지</span>
+    <time datetime="2026-10-12">2026. 10. 12</time>
+  </header>
+
+  <div class="layout">
+    <aside class="day reveal" style="--i:0" aria-label="오늘의 날짜 정보">
+      <div class="day-number">
+        <strong>12</strong>
+        <span>2026년<br>10월</span>
+      </div>
+      <p class="day-weekday">월요일</p>
+
+      <dl class="day-facts">
+        <div><dt>올해의</dt><dd>285번째 날</dd></div>
+        <div><dt>올해 남은 날</dt><dd>80일</dd></div>
+        <div><dt>절기</dt><dd>한로와 상강 사이</dd></div>
+      </dl>
+
+      <ol class="weekbar" aria-label="이번 주">
+        <li aria-current="date"><span class="wd">월</span><span class="dn">12</span></li>
+        <li><span class="wd">화</span><span class="dn">13</span></li>
+        <li><span class="wd">수</span><span class="dn">14</span></li>
+        <li><span class="wd">목</span><span class="dn">15</span></li>
+        <li><span class="wd">금</span><span class="dn">16</span></li>
+        <li><span class="wd">토</span><span class="dn">17</span></li>
+        <li><span class="wd">일</span><span class="dn">18</span></li>
+      </ol>
+    </aside>
+
+    <main id="main" class="content">
+      <section class="quote reveal" style="--i:1" aria-labelledby="quote-label">
+        <p class="eyebrow" id="quote-label">오늘의 문장</p>
+        <blockquote>
+          <p class="quote-text">서두르지 않아도 계절은 제때 도착한다. <em>나도 그렇다.</em></p>
+        </blockquote>
+        <p class="quote-note">
+          10월의 둘째 월요일, 나무들은 누가 재촉하지 않아도 제 속도로 물들고 있습니다.
+          한 주가 시작되면 해야 할 일이 한꺼번에 밀려오는 것 같지만, 모든 것을 오늘 끝낼 필요는 없습니다.
+          중요한 것은 속도보다 방향을 놓치지 않는 일입니다.
+          조금 느리더라도, 오늘은 내가 가고 싶은 쪽으로 한 걸음만 옮겨 보세요.
+        </p>
+      </section>
+
+      <section class="reveal" style="--i:2" aria-labelledby="tasks-title">
+        <div class="section-head">
+          <h2 id="tasks-title">오늘의 작은 실천</h2>
+          <span class="count" id="taskCount"><b>0</b> / 3 완료</span>
+        </div>
+        <ul class="tasks">
+          <li>
+            <label class="task">
+              <input type="checkbox" data-task="window" aria-describedby="desc-window">
+              <span class="box" aria-hidden="true"></span>
+              <span class="task-body">
+                <span class="task-title">창문을 열고 5분 동안 바깥 공기 마시기</span>
+                <span class="task-desc" id="desc-window">서늘해진 아침 공기로 오늘의 날씨를 몸으로 먼저 느껴 보세요.</span>
+              </span>
+            </label>
+          </li>
+          <li>
+            <label class="task">
+              <input type="checkbox" data-task="one-thing" aria-describedby="desc-one">
+              <span class="box" aria-hidden="true"></span>
+              <span class="task-body">
+                <span class="task-title">이번 주에 끝내고 싶은 일 딱 하나만 적기</span>
+                <span class="task-desc" id="desc-one">목록이 길수록 마음이 무거워집니다. 하나면 충분합니다.</span>
+              </span>
+            </label>
+          </li>
+          <li>
+            <label class="task">
+              <input type="checkbox" data-task="gratitude" aria-describedby="desc-grat">
+              <span class="box" aria-hidden="true"></span>
+              <span class="task-body">
+                <span class="task-title">잠들기 전, 고마웠던 장면 하나 떠올리기</span>
+                <span class="task-desc" id="desc-grat">휴대폰을 내려놓고 오늘 나를 웃게 한 순간을 천천히 되짚어 보세요.</span>
+              </span>
+            </label>
+          </li>
+        </ul>
+        <p class="done-note" id="doneNote" aria-live="polite"></p>
+      </section>
+
+      <section class="reveal" style="--i:3" aria-labelledby="memo-title">
+        <div class="section-head">
+          <h2 id="memo-title">하루 정리 메모</h2>
+        </div>
+        <div class="field">
+          <label for="memo">오늘을 몇 줄로 정리한다면</label>
+          <textarea id="memo" aria-describedby="memoHelp memoStatus" maxlength="2000" placeholder="예: 생각보다 느렸지만, 미뤄 둔 메일 하나를 보냈다."></textarea>
+          <p class="helper" id="memoHelp">입력하는 동안 이 브라우저에 자동으로 저장됩니다. 다른 기기와는 공유되지 않습니다.</p>
+          <div class="memo-foot">
+            <span class="status" id="memoStatus" aria-live="polite">아직 작성한 메모가 없습니다.</span>
+            <div class="memo-actions">
+              <span class="chars" id="memoChars">0 / 2000</span>
+              <button type="button" class="btn-ghost" id="clearMemo" disabled>메모 지우기</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <footer class="colophon">
+    내일 아침에는 새로운 한 페이지가 열립니다.
+  </footer>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var DAY = "2026-10-12";
+  var PREFIX = "today-page:" + DAY + ":";
+  var MEMO_KEY = PREFIX + "memo";
+  var MEMO_AT_KEY = PREFIX + "memo:at";
+  var TASK_KEY = PREFIX + "tasks";
+  var MAX = 2000;
+
+  var storageOk = (function () {
+    try {
+      var t = "__today_page_test__";
+      window.localStorage.setItem(t, "1");
+      window.localStorage.removeItem(t);
+      return true;
+    } catch (e) { return false; }
+  })();
+
+  function read(key) {
+    if (!storageOk) return null;
+    try { return window.localStorage.getItem(key); } catch (e) { return null; }
+  }
+  function write(key, value) {
+    if (!storageOk) return false;
+    try { window.localStorage.setItem(key, value); return true; } catch (e) { return false; }
+  }
+  function remove(key) {
+    if (!storageOk) return;
+    try { window.localStorage.removeItem(key); } catch (e) {}
+  }
+  function timeLabel(d) {
+    return d.toLocaleTimeString("ko-KR", { hour: "numeric", minute: "2-digit" });
+  }
+
+  /* 체크리스트 */
+  var boxes = Array.prototype.slice.call(document.querySelectorAll("[data-task]"));
+  var countEl = document.getElementById("taskCount");
+  var doneNote = document.getElementById("doneNote");
+  var saved = {};
+
+  function loadTasks() {
+    try { saved = JSON.parse(read(TASK_KEY) || "{}") || {}; } catch (e) { saved = {}; }
+    boxes.forEach(function (box) { box.checked = !!saved[box.dataset.task]; });
+  }
+
+  function renderCount() {
+    var done = boxes.filter(function (b) { return b.checked; }).length;
+    countEl.innerHTML = "<b>" + done + "</b> / " + boxes.length + " 완료";
+    if (done === boxes.length) {
+      doneNote.textContent = "오늘의 실천을 모두 마쳤어요. 충분히 잘 보낸 하루입니다.";
+    } else if (done > 0) {
+      doneNote.textContent = boxes.length - done + "개 남았어요. 남은 일도 천천히 해도 괜찮습니다.";
+    } else {
+      doneNote.textContent = "";
+    }
+  }
+
+  loadTasks();
+  boxes.forEach(function (box) {
+    box.addEventListener("change", function () {
+      saved[box.dataset.task] = box.checked;
+      write(TASK_KEY, JSON.stringify(saved));
+      renderCount();
+    });
+  });
+  renderCount();
+
+  /* 메모 */
+  var memo = document.getElementById("memo");
+  var statusEl = document.getElementById("memoStatus");
+  var charsEl = document.getElementById("memoChars");
+  var clearBtn = document.getElementById("clearMemo");
+  var timer = null;
+  var armTimer = null;
+
+  function setStatus(text, kind) {
+    statusEl.textContent = text;
+    statusEl.classList.toggle("is-saved", kind === "saved");
+    statusEl.classList.toggle("is-error", kind === "error");
+  }
+  function renderChars() {
+    charsEl.textContent = memo.value.length + " / " + MAX;
+    clearBtn.disabled = memo.value.length === 0;
+  }
+  function loadMemo() {
+    var existing = read(MEMO_KEY);
+    memo.value = existing || "";
+    if (existing) {
+      var at = Number(read(MEMO_AT_KEY));
+      setStatus(at ? "저장됨 " + timeLabel(new Date(at)) : "저장된 메모를 불러왔습니다.", "saved");
+    } else {
+      setStatus("아직 작성한 메모가 없습니다.", null);
+    }
+    renderChars();
+  }
+
+  if (!storageOk) {
+    setStatus("이 브라우저에서는 저장할 수 없습니다. 사생활 보호 모드인지 확인해 주세요.", "error");
+    renderChars();
+  } else {
+    loadMemo();
+  }
+
+  function saveNow() {
+    timer = null;
+    if (!storageOk) return;
+    var value = memo.value;
+    if (value.trim() === "") {
+      remove(MEMO_KEY);
+      remove(MEMO_AT_KEY);
+      setStatus("아직 작성한 메모가 없습니다.", null);
+      return;
+    }
+    var now = Date.now();
+    if (write(MEMO_KEY, value) && write(MEMO_AT_KEY, String(now))) {
+      setStatus("저장됨 " + timeLabel(new Date(now)), "saved");
+    } else {
+      setStatus("저장 공간이 부족해 저장하지 못했습니다. 잠시 후 다시 시도해 주세요.", "error");
+    }
+  }
+
+  function flush() {
+    if (timer) { clearTimeout(timer); saveNow(); }
+  }
+
+  memo.addEventListener("input", function () {
+    renderChars();
+    disarm();
+    if (!storageOk) return;
+    setStatus("저장하는 중", null);
+    clearTimeout(timer);
+    timer = setTimeout(saveNow, 500);
+  });
+  memo.addEventListener("blur", flush);
+  window.addEventListener("pagehide", flush);
+  document.addEventListener("visibilitychange", function () {
+    if (document.visibilityState === "hidden") flush();
+  });
+
+  /* 다른 탭에서 바뀐 내용 반영 */
+  window.addEventListener("storage", function (e) {
+    if (e.key === TASK_KEY) { loadTasks(); renderCount(); }
+    if ((e.key === MEMO_KEY || e.key === null) && document.activeElement !== memo) { loadMemo(); }
+  });
+
+  function disarm() {
+    clearTimeout(armTimer);
+    clearBtn.dataset.armed = "false";
+    clearBtn.textContent = "메모 지우기";
+  }
+
+  clearBtn.addEventListener("click", function () {
+    if (clearBtn.dataset.armed !== "true") {
+      clearBtn.dataset.armed = "true";
+      clearBtn.textContent = "한 번 더 누르면 지워집니다";
+      clearTimeout(armTimer);
+      armTimer = setTimeout(disarm, 4000);
+      return;
+    }
+    clearTimeout(timer);
+    timer = null;
+    memo.value = "";
+    remove(MEMO_KEY);
+    remove(MEMO_AT_KEY);
+    disarm();
+    renderChars();
+    setStatus("메모를 지웠습니다.", null);
+    memo.focus();
+  });
+})();
+</script>
+</body>
+</html>
