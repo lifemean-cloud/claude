@@ -15,6 +15,7 @@
   },
   "enabledPlugins": {
     "ecc@ecc": true,
-    "claude-mem@thedotmack": true
+    "claude-mem@thedotmack": true,
+    "superpowers@claude-plugins-official": true
   }
 }
