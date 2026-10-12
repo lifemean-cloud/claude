@@ -1,6 +1,8 @@
 # ============================================================
 #  자동 출근부 — 내 컴퓨터가 꺼져 있어도 GitHub 가상 컴퓨터가 대신 실행합니다.
 #
+#  ⏸ 현재 자동 실행(①, ③)은 일시 중지 상태입니다. 수동 실행(②)만 가능합니다.
+#
 #  언제 실행되나요?
 #   ① 매일 밤 12시(한국 시간) 자동
 #   ② Actions 탭의 [Run workflow] 버튼 (지시문을 직접 적을 수도 있음)
@@ -25,10 +27,11 @@
 name: 자동 실행 (auto_run)
 
 on:
-  schedule:
-    # GitHub 시계는 UTC 기준 → UTC 15:00 = 한국 시간 00:00 (자정)
-    # ※ GitHub 사정으로 몇 분~수십 분 늦게 시작될 수 있습니다.
-    - cron: "0 15 * * *"
+  # ⏸ 자동 실행 일시 중지 (2026-10-13) — 다시 켜려면 아래 schedule 세 줄과
+  #    repository_dispatch 두 줄의 맨 앞 '#'을 지우세요.
+  # schedule:
+  #   - cron: "0 15 * * *"   # UTC 15:00 = 한국 시간 00:00
+  # 수동 실행(Actions 탭 Run workflow 버튼)은 계속 가능합니다.
   workflow_dispatch:
     inputs:
       task:
@@ -39,8 +42,8 @@ on:
         description: "검수·개선 횟수 (0이면 초안 그대로)"
         required: false
         default: "1"
-  repository_dispatch:
-    types: [run-now]
+  # repository_dispatch:
+  #   types: [run-now]
 
 # 결과물을 저장소에 푸시하려면 쓰기 권한이 필요합니다.
 permissions:
