@@ -35,7 +35,8 @@ __pycache__/
 /skills/
 /data/
 
-# 다른 AI 도구용 스킬 바로가기 폴더
+# 다른 AI 도구용 스킬 바로가기(또는 복사본) 폴더
+/agent/
 /.adal/
 /.aider-desk/
 /.augment/
