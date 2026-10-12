@@ -5,9 +5,16 @@
         "source": "git",
         "url": "https://github.com/affaan-m/ECC.git"
       }
+    },
+    "thedotmack": {
+      "source": {
+        "source": "github",
+        "repo": "thedotmack/claude-mem"
+      }
     }
   },
   "enabledPlugins": {
-    "ecc@ecc": true
+    "ecc@ecc": true,
+    "claude-mem@thedotmack": true
   }
 }
