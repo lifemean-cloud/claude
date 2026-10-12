@@ -11,12 +11,18 @@
         "source": "github",
         "repo": "thedotmack/claude-mem"
       }
+    },
+    "superpowers-marketplace": {
+      "source": {
+        "source": "git",
+        "url": "https://github.com/obra/superpowers-marketplace.git"
+      }
     }
   },
   "enabledPlugins": {
     "ecc@ecc": true,
     "claude-mem@thedotmack": true,
-    "superpowers@claude-plugins-official": true
+    "superpowers@superpowers-marketplace": true
   },
   "hooks": {
     "PreToolUse": [
